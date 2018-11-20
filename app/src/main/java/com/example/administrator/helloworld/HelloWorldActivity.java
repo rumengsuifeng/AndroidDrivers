@@ -1,6 +1,7 @@
 package com.example.administrator.helloworld;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -26,6 +27,7 @@ public class HelloWorldActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);                 //调用父类onCreate方法
         setContentView(R.layout.activity_hello_world);      //给当前活动加载一个布局
 
+        HardCor.ledOpen();      //静态方法调用，先是打开LED
         button = (Button) findViewById(R.id.button);        //从布局文件中拿到按键ID
 
         checkBoxled1 = (CheckBox) findViewById(R.id.LED1);  //从布局文件中拿到复选框的ID
@@ -37,7 +39,7 @@ public class HelloWorldActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // Code here executes on main thread after user presses button
 
-                HardCor hardCor = new HardCor();    //会调用到HardCor.java中的static块
+//                HardCor hardCor = new HardCor();    //会调用到HardCor.java中的static块
 
                 ledon = !ledon;
                 if (ledon) {
@@ -46,12 +48,16 @@ public class HelloWorldActivity extends AppCompatActivity {
                     checkBoxled2.setChecked(true);
                     checkBoxled3.setChecked(true);
                     checkBoxled4.setChecked(true);
+                    for(int i = 0; i < 4; i++)
+                        HardCor.ledCtrl(i, 1);
                 } else {
                     button.setText("ALL OFF");          //更改按键上的显示字符
                     checkBoxled1.setChecked(false);     //设置复选框没选中
                     checkBoxled2.setChecked(false);
                     checkBoxled3.setChecked(false);
                     checkBoxled4.setChecked(false);
+                    for(int i = 0; i < 4; i++)
+                        HardCor.ledCtrl(i, 0);
                 }
             }
         });
@@ -99,27 +105,44 @@ public class HelloWorldActivity extends AppCompatActivity {
         switch(view.getId()) {
             case R.id.LED1:
                 if (checked)    //如果是选中
+                {
                     Toast.makeText(HelloWorldActivity.this, "LED1 ON", Toast.LENGTH_SHORT).show();      //打印字符串到屏幕上
-            else
-                    Toast.makeText(HelloWorldActivity.this, "LED1 OFF", Toast.LENGTH_SHORT).show();
+                HardCor.ledCtrl(0, 1);      //控制LED灯的亮灭
+        }
+            else{
+            Toast.makeText(HelloWorldActivity.this, "LED1 OFF", Toast.LENGTH_SHORT).show();
+            HardCor.ledCtrl(0, 0);
+        }
                 break;
             case R.id.LED2:
-                if (checked)
+                if (checked) {
                     Toast.makeText(HelloWorldActivity.this, "LED2 ON", Toast.LENGTH_SHORT).show();
-            else
+                    HardCor.ledCtrl(1, 1);
+                }
+            else{
                     Toast.makeText(HelloWorldActivity.this, "LED2 OFF", Toast.LENGTH_SHORT).show();
+                    HardCor.ledCtrl(1, 0);
+                }
                 break;
             case R.id.LED3:
-                if (checked)
+                if (checked) {
                     Toast.makeText(HelloWorldActivity.this, "LED3 ON", Toast.LENGTH_SHORT).show();
-                else
+                    HardCor.ledCtrl(2, 1);
+                }
+                else {
                     Toast.makeText(HelloWorldActivity.this, "LED3 OFF", Toast.LENGTH_SHORT).show();
+                    HardCor.ledCtrl(2, 0);
+                }
                 break;
             case R.id.LED4:
-                if (checked)
+                if (checked) {
                     Toast.makeText(HelloWorldActivity.this, "LED4 ON", Toast.LENGTH_SHORT).show();
-                else
+                    HardCor.ledCtrl(3, 1);
+                }
+                else {
                     Toast.makeText(HelloWorldActivity.this, "LED4 OFF", Toast.LENGTH_SHORT).show();
+                    HardCor.ledCtrl(3, 0);
+                }
                 break;
             // TODO: Veggie sandwich
         }

@@ -11,6 +11,7 @@
 	collect2: error: ld returned 1 exit status
 	root@qihua-virtual-machine:/home/root/cqa64_android_v5.1/HAL# ”
 	以上问题的解决办法是换了个交叉编译器好了，但是现在我也没搞明白编译so文件的编译器和编译Android源码的编译器有啥联系，以上问题的帖子链接在：http://bbs.100ask.org/forum.php?mod=viewthread&tid=22161&page=1#pid79973
-
-	
+5.  编译命令再次进化：
+	arm-linux-gnueabi-gcc  -fPIC -shared hardcor.c -o libhardcor.so  -I /usr/lib/jvm/java-7-openjdk-amd64/include/ -nostdlib /home/root/cqa64_android_v5.1/android/prebuilts/ndk/9/platforms/android-21/arch-arm/usr/lib/libc.so -I /home/root/cqa64_android_v5.1/android/prebuilts/ndk/9/platforms/android-21/arch-arm/usr/include/ /home/root/cqa64_android_v5.1/android/prebuilts/ndk/9/platforms/android-21/arch-arm/usr/lib/liblog.so
+	因为代码中使用了__android_log_print打印函数（该函数可以把调试信息打印在studio的logcat栏里）所以指定了头文件，-I 参数指定log.h头文件的路径；后边的目录指定了liblog.so的路径
 	

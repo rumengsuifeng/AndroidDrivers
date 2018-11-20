@@ -2,6 +2,8 @@
 #include <jni.h>		//该头文件的路径在PC机(ubuntu)的/usr/lib/jvm/java-1.7.0-openjdk-amd64/include/路径
 #include <stdlib.h>		//包含了malloc函数
 
+#include <android/log.h>	//liblog库
+
 #if 0
 typedef struct {
     char *name;          /* Java里调用的函数名 */
@@ -12,20 +14,23 @@ typedef struct {
 
 jint ledOpen(JNIEnv *env , jobject class)	//在JAVA文件中即使是空的参数也要在C文件这边有这两个参数，再加上定义整形数组类型的参数
 {
+	__android_log_print(ANDROID_LOG_DEBUG, "LEDDemo", "native ledOpen...");		//打印函数，可以在studio的logcat栏看到输出
 	return 0;
 }
 
 void ledClose(JNIEnv *env , jobject class)
 {
+	__android_log_print(ANDROID_LOG_DEBUG, "LEDDemo", "native ledClose...");
 }
 
 jint ledCtrl(JNIEnv *env , jobject class, jint which, jint status)
 {
+	__android_log_print(ANDROID_LOG_DEBUG, "LEDDemo", "native ledCtrl...");
 	return 0;
 }
 
 static const JNINativeMethod methods[] = {
-	{"ledOpen", "()I", (void *)ledOpen},			//第二个参数()表示函数的参数，V代表返回值是void。(Ljava/lang/String;)Ljava/lang/String;表示返回值为string，参数也为string
+	{"ledOpen", "()I", (void *)ledOpen},			//第二个参数：()表示函数的参数，I代表函数的返回值是int
 	{"ledClose", "()V", (void *)ledClose},	
 	{"ledCtrl", "(II)I", (void *)ledCtrl},	
 };
@@ -46,7 +51,7 @@ JNI_OnLoad(JavaVM *jvm, void *reserved)		//由jni.pdf文件中拷贝而来，P11
 	}
 
 	/* 2. map java hello <-->c c_hello */
-	if ((*env)->RegisterNatives(env, cls, methods, 1) < 0)	//建立映射，函数对照表在methods数组中，参数3表示数组中的项，目前只有1项，所以是1
+	if ((*env)->RegisterNatives(env, cls, methods, 3) < 0)	//建立映射，函数对照表在methods数组中，参数3表示数组中的项，目前只有3项，所以是3
 		return JNI_ERR;
 
 	return JNI_VERSION_1_4;		//返回环境版本号
