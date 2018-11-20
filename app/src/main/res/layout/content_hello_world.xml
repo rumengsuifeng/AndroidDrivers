@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 注释
+    android.support.constraint.ConstraintLayout
+    LinearLayout    表示线性布局
+    android:orientation="vertical" 垂直摆放
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".HelloWorldActivity"
+    tools:showIn="@layout/activity_hello_world">
+
+    <!-- 注释
+    TextView    表示显示的内容属性设置
+    android:text 表示显示的具体内容
+    -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hello World!!! Android app number one!"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- 注释
+    Button    表示按键
+    android:id="@+id/button" 表示定义这个元素唯一的标识符
+    android:text 表示按键上显示的内容
+    android:layout_width="match_parent" 表示跟父元素一样宽
+    android:layout_height="wrap_content" 表示高度刚好能装下显示的内容就好
+    -->
+    <Button
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ALL OFF"
+        />
+
+    <!-- 注释
+    CheckBox 表示复选框
+    android:text="LED1" 表示复选框上要显示的内容
+     android:onClick="onCheckboxClicked"  表示复选框的单击方法检测，按Alt+Enter可直接生成方法到JAVA源码
+    -->
+    <CheckBox
+        android:id="@+id/LED1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="LED1"
+        android:onClick="onCheckboxClicked"
+        />
+    <CheckBox
+        android:id="@+id/LED2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="LED2"
+        android:onClick="onCheckboxClicked"
+        />
+    <CheckBox
+        android:id="@+id/LED3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="LED3"
+        android:onClick="onCheckboxClicked"
+        />
+    <CheckBox
+        android:id="@+id/LED4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="LED4"
+        android:onClick="onCheckboxClicked"
+        />
+
+</LinearLayout>
