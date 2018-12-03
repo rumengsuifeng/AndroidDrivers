@@ -19,8 +19,7 @@ public class HelloWorldActivity extends AppCompatActivity {
     private boolean ledon = false;      //相当于一个flag
     private CheckBox checkBoxled1 = null;   //定义复选框
     private CheckBox checkBoxled2 = null;
-    private CheckBox checkBoxled3 = null;
-    private CheckBox checkBoxled4 = null;
+    private CheckBox Beep = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,8 +31,7 @@ public class HelloWorldActivity extends AppCompatActivity {
 
         checkBoxled1 = (CheckBox) findViewById(R.id.LED1);  //从布局文件中拿到复选框的ID
         checkBoxled2 = (CheckBox) findViewById(R.id.LED2);
-        checkBoxled3 = (CheckBox) findViewById(R.id.LED3);
-        checkBoxled4 = (CheckBox) findViewById(R.id.LED4);
+        Beep = (CheckBox) findViewById(R.id.BEEP);
 
         button.setOnClickListener(new View.OnClickListener() {      //设置按键的监听函数
             public void onClick(View v) {
@@ -46,18 +44,19 @@ public class HelloWorldActivity extends AppCompatActivity {
                     button.setText("ALL ON");           //更改按键上的显示字符
                     checkBoxled1.setChecked(true);      //设置复选框选中
                     checkBoxled2.setChecked(true);
-                    checkBoxled3.setChecked(true);
-                    checkBoxled4.setChecked(true);
-                    for(int i = 0; i < 4; i++)
-                        HardCor.ledCtrl(i, 1);
+                    Beep.setChecked(true);
+
+                    HardCor.ledCtrl(364, 1);
+                    HardCor.ledCtrl(362, 1);
+                    HardCor.ledCtrl(120, 1);
                 } else {
                     button.setText("ALL OFF");          //更改按键上的显示字符
                     checkBoxled1.setChecked(false);     //设置复选框没选中
                     checkBoxled2.setChecked(false);
-                    checkBoxled3.setChecked(false);
-                    checkBoxled4.setChecked(false);
-                    for(int i = 0; i < 4; i++)
-                        HardCor.ledCtrl(i, 0);
+                    Beep.setChecked(false);
+                    HardCor.ledCtrl(364, 0);
+                    HardCor.ledCtrl(362, 0);
+                    HardCor.ledCtrl(120, 0);
                 }
             }
         });
@@ -107,41 +106,31 @@ public class HelloWorldActivity extends AppCompatActivity {
                 if (checked)    //如果是选中
                 {
                     Toast.makeText(HelloWorldActivity.this, "LED1 ON", Toast.LENGTH_SHORT).show();      //打印字符串到屏幕上
-                HardCor.ledCtrl(0, 1);      //控制LED灯的亮灭
+                HardCor.ledCtrl(364, 1);      //控制LED灯的亮灭
         }
             else{
             Toast.makeText(HelloWorldActivity.this, "LED1 OFF", Toast.LENGTH_SHORT).show();
-            HardCor.ledCtrl(0, 0);
+            HardCor.ledCtrl(364, 0);
         }
                 break;
-            case R.id.LED2:
-                if (checked) {
+            case R.id.LED2:             //LED的驱动标号计算公式是(x * 32) + 10, x是A的时候就是0，x是B的时候就是1，依次类推
+                if (checked) {              //本例子用的是L，所以是11 * 32; 10就是后边跟的标号，加上10所以就是362
                     Toast.makeText(HelloWorldActivity.this, "LED2 ON", Toast.LENGTH_SHORT).show();
-                    HardCor.ledCtrl(1, 1);
+                    HardCor.ledCtrl(362, 1);
                 }
             else{
                     Toast.makeText(HelloWorldActivity.this, "LED2 OFF", Toast.LENGTH_SHORT).show();
-                    HardCor.ledCtrl(1, 0);
+                    HardCor.ledCtrl(362, 0);
                 }
                 break;
-            case R.id.LED3:
+            case R.id.BEEP:
                 if (checked) {
-                    Toast.makeText(HelloWorldActivity.this, "LED3 ON", Toast.LENGTH_SHORT).show();
-                    HardCor.ledCtrl(2, 1);
+                    Toast.makeText(HelloWorldActivity.this, "BEEP ON", Toast.LENGTH_SHORT).show();
+                    HardCor.ledCtrl(120, 1);
                 }
                 else {
-                    Toast.makeText(HelloWorldActivity.this, "LED3 OFF", Toast.LENGTH_SHORT).show();
-                    HardCor.ledCtrl(2, 0);
-                }
-                break;
-            case R.id.LED4:
-                if (checked) {
-                    Toast.makeText(HelloWorldActivity.this, "LED4 ON", Toast.LENGTH_SHORT).show();
-                    HardCor.ledCtrl(3, 1);
-                }
-                else {
-                    Toast.makeText(HelloWorldActivity.this, "LED4 OFF", Toast.LENGTH_SHORT).show();
-                    HardCor.ledCtrl(3, 0);
+                    Toast.makeText(HelloWorldActivity.this, "BEEP OFF", Toast.LENGTH_SHORT).show();
+                    HardCor.ledCtrl(120, 0);
                 }
                 break;
             // TODO: Veggie sandwich

@@ -61,17 +61,10 @@
         android:onClick="onCheckboxClicked"
         />
     <CheckBox
-        android:id="@+id/LED3"
+        android:id="@+id/BEEP"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="LED3"
-        android:onClick="onCheckboxClicked"
-        />
-    <CheckBox
-        android:id="@+id/LED4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="LED4"
+        android:text="BEEP"
         android:onClick="onCheckboxClicked"
         />
 
